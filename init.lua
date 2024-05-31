@@ -1,4 +1,18 @@
-require("config/opts")
-require("config/keymaps")
-require("config/autocommands")
-require("config/lazy")
+require("config.options")
+require("config.keymaps")
+require("config.autocommands")
+
+-- Lazy.nvim
+require("config.lazy")
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({ import = "plugins" }, { import = "plugins.temp" })
+
+-- Colorscheme
+vim.cmd.colorscheme("tundra")
