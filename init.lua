@@ -1,9 +1,9 @@
-require("config.options")
-require("config.keymaps")
-require("config.autocommands")
+require("core.options")
+require("core.keymaps")
+require("core.autocommands")
 
 -- Lazy call and bootstrapping
-require("config.lazy")
+require("core.lazy")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -15,4 +15,4 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({ import = "plugins" })
 
 -- Colorscheme
-vim.cmd.colorscheme("hybrid_reverse")
+vim.cmd.colorscheme("moonfly")

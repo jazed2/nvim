@@ -93,6 +93,4 @@ return {
 			},
 		},
 	},
-	{ "dmadisetti/paragraph-number.vim" },
-	{ "junegunn/goyo.vim", vim.keymap.set("n", "<leader>F", "<cmd>Goyo<cr>", { desc = "Goyo" }) },
 }
