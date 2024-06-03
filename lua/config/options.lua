@@ -11,9 +11,9 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
-vim.opt.number = true
--- Relative line numbers
 vim.opt.relativenumber = true
+vim.opt.number = true
+vim.o.statuscolumn = "%s %l %r "
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
