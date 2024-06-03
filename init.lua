@@ -2,7 +2,7 @@ require("config.options")
 require("config.keymaps")
 require("config.autocommands")
 
--- Lazy.nvim
+-- Lazy call and bootstrapping
 require("config.lazy")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ import = "plugins" }, { import = "plugins.temp" })
+require("lazy").setup({ import = "plugins" })
 
 -- Colorscheme
-vim.cmd.colorscheme("tundra")
+vim.cmd.colorscheme("hybrid_reverse")
