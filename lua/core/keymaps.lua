@@ -1,11 +1,19 @@
-local keymap = vim.keymap
+-- Modes
+--   normal_mode = "n",
+--   insert_mode = "i",
+--   visual_mode = "v",
+--   visual_block_mode = "x",
+--   term_mode = "t",
+--   command_mode = "c",
+
+local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Diagnostic keymaps
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+keymap("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -13,36 +21,38 @@ keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnosti
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+keymap("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Tabs
-keymap.set("n", "tt", ":tabnew .<Return>")
-keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
-keymap.set("n", "tw", ":tabclose<Return>", opts)
+keymap("n", "tt", ":tabnew .<Return>")
+keymap("n", "te", ":tabedit")
+keymap("n", "<tab>", ":tabnext<Return>", opts)
+keymap("n", "<s-tab>", ":tabprev<Return>", opts)
+keymap("n", "tw", ":tabclose<Return>", opts)
+
+-- Fast escape when in Insert mode
+keymap("i", "jk", "<esc>", opts)
+keymap("i", "kj", "<esc>", opts)
 
 -- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
+keymap("n", "ss", ":split<Return>", opts)
+keymap("n", "sv", ":vsplit<Return>", opts)
 
--- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
+-- Resize with arrows when using multiple windows
+keymap("n", "<C-Up>", "<C-w>+", opts)
+keymap("n", "<C-Down>", "<C-w>-", opts)
+keymap("n", "<C-Right>", "<C-w><", opts)
+keymap("n", "<C-Left>", "<C-w>>", opts)
 
--- Resize window
-keymap.set("n", "<C-S-h>", "<C-w><")
-keymap.set("n", "<C-S-l>", "<C-w>>")
-keymap.set("n", "<C-S-k>", "<C-w>+")
-keymap.set("n", "<C-S-j>", "<C-w>-")
+-- Move text up and down
+keymap("v", "<a-j>", ":m .+2<cr>==", opts)
+keymap("v", "<a-k>", ":m .-3<cr>==", opts)
