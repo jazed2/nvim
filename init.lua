@@ -15,4 +15,4 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({ import = "plugins" })
 
 -- Colorscheme
-vim.cmd.colorscheme("evergarden")
+vim.cmd.colorscheme("moonfly")
