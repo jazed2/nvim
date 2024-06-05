@@ -11,3 +11,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Preserve folds in between sessions
+vim.api.nvim_create_autocmd({ "BufWinLeave", "BufEnter" }, {
+	pattern = { "*.*" },
+	desc = "Save folds when exiting",
+	command = "mkview 1",
+})
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufRead" }, {
+	pattern = { "*.*" },
+	desc = "Load folds when entering",
+	command = "silent! loadview 1",
+})
