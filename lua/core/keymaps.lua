@@ -48,10 +48,10 @@ keymap("n", "ss", ":split<Return>", opts)
 keymap("n", "sv", ":vsplit<Return>", opts)
 
 -- Resize with arrows when using multiple windows
-keymap("n", "<C-Up>", "<C-w>+", opts)
-keymap("n", "<C-Down>", "<C-w>-", opts)
-keymap("n", "<C-Right>", "<C-w><", opts)
-keymap("n", "<C-Left>", "<C-w>>", opts)
+keymap("n", "<M-=>", "<C-w>+", opts)
+keymap("n", "<M-->", "<C-w>-", opts)
+keymap("n", "<M-.>", "<C-w><", opts)
+keymap("n", "<M-,>", "<C-w>>", opts)
 
 -- Move text up and down
 keymap("v", "<a-j>", ":m .+2<cr>==", opts)

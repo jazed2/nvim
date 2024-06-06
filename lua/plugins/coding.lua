@@ -1,5 +1,4 @@
 return {
-
 	{ -- DAP and debugging utils
 		-- NOTE: Yes, you can install new plugins here!
 		"mfussenegger/nvim-dap",
