@@ -138,13 +138,29 @@ return {
 			{ "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
 			{ "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
 		},
-		opts = {
-			options = {
-				mode = "tabs",
-				show_buffer_close_icons = false,
-				show_close_icon = false,
-			},
-		},
+		config = function()
+			require("bufferline").setup({
+				options = {
+					highlights = {
+						buffer_selected = {
+							bold = false,
+							italic = false,
+						},
+					},
+					buffer_close_icon = "",
+					hover = {
+						enabled = true,
+						delay = 100,
+						reveal = { "close" },
+					},
+					mode = "tabs",
+					max_name_length = 50,
+					numbers = function(opts)
+						return string.format("%s", opts.raise(opts.ordinal))
+					end,
+				},
+			})
+		end,
 	},
 
 	{ -- LazyGit integration with Telescope
@@ -163,7 +179,7 @@ return {
 		},
 	},
 
-	{ -- Nice file explorer
+	{ -- File explorer
 		"stevearc/oil.nvim",
 		opts = {
 			view_options = {
