@@ -53,10 +53,6 @@ keymap("n", "<M-->", "<C-w>-", opts)
 keymap("n", "<M-.>", "<C-w><", opts)
 keymap("n", "<M-,>", "<C-w>>", opts)
 
--- Move text up and down
-keymap("v", "<a-j>", ":m .+2<cr>==", opts)
-keymap("v", "<a-k>", ":m .-3<cr>==", opts)
-
 -- Prevent typo when pressing :w and :wq
 vim.cmd([[
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
