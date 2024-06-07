@@ -68,7 +68,8 @@ opt.cursorline = true
 opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-opt.hlsearch = false
+opt.hlsearch = true
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- termgui colors
 opt.termguicolors = true
