@@ -194,6 +194,32 @@ return {
 		},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		vim.keymap.set("n", ";f", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+		vim.keymap.set("n", ";e", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+	},
+
+	{ -- ZenMode
+		"folke/zen-mode.nvim",
+		dependencies = "folke/twilight.nvim",
+		vim.keymap.set("n", "<leader>g", ":ZenMode<CR>", { noremap = true, silent = true }),
+		opts = {
+			window = {
+				options = {
+					signcolumn = "no",
+					number = false,
+					relativenumber = false,
+					cursorcolumn = false,
+					foldcolumn = "0",
+				},
+			},
+			plugins = {
+				alacritty = { enabled = true, font = "10" },
+				tmux = { enabled = false },
+			},
+			-- callback where you can add custom code when the Zen window opens
+			-- No need to add *on_close* callback to reload folds
+			on_open = function(win)
+				vim.cmd("%foldopen")
+			end,
+		},
 	},
 }
