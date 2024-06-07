@@ -13,9 +13,8 @@ vim.g.have_nerd_font = true
 
 -- Nice tab spacing
 opt.expandtab = true
-opt.smarttab = true
 opt.shiftwidth = 2
-opt.tabstop = 2
+opt.tabstop = 4
 
 -- Make line numbers default
 opt.relativenumber = true
@@ -70,9 +69,6 @@ opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = false
-
--- GUI cursor for block cursor
-opt.guicursor = ""
 
 -- termgui colors
 opt.termguicolors = true

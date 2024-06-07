@@ -82,7 +82,7 @@ return {
 				enable_get_fold_virt_text = false,
 			})
 
-			vim.o.foldcolumn = "1" -- '0' is not bad
+			vim.o.foldcolumn = "0" -- '0' is not bad
 			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 			vim.o.foldlevelstart = 99
 			vim.o.foldenable = true
@@ -182,17 +182,18 @@ return {
 	{ -- File explorer
 		"stevearc/oil.nvim",
 		opts = {
+			skip_confirm_for_simple_edits = true,
 			view_options = {
-				-- Show files and directories that start with "."
 				show_hidden = true,
 				-- This function defines what is considered a "hidden" file
 				is_hidden_file = function(name, bufnr)
 					return vim.startswith(name, ".")
 				end,
+				natural_order = true,
 			},
 		},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+		vim.keymap.set("n", ";f", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
 	},
 }
