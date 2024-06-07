@@ -1,4 +1,7 @@
 return {
+	-- Automatic tabstop and shift width
+	{ "tpope/vim-sleuth" },
+
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
 
