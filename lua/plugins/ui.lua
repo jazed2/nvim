@@ -167,7 +167,7 @@ return {
 		"kdheepak/lazygit.nvim",
 		keys = {
 			{
-				";c",
+				"<leader>lg",
 				":LazyGit<Return>",
 				silent = true,
 				noremap = true,
@@ -194,13 +194,13 @@ return {
 		},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		vim.keymap.set("n", ";e", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
 	},
 
 	{ -- ZenMode
 		"folke/zen-mode.nvim",
 		dependencies = "folke/twilight.nvim",
-		vim.keymap.set("n", "<leader>g", ":ZenMode<CR>", { noremap = true, silent = true }),
+		vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true }),
 		opts = {
 			window = {
 				options = {

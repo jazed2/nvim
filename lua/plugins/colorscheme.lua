@@ -7,6 +7,7 @@ return {
 		config = function()
 			vim.g.adwaita_darker = false -- for darker version
 			vim.g.adwaita_transparent = false -- makes the background transparent
+			vim.cmd.colorscheme("adwaita")
 		end,
 	},
 
