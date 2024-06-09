@@ -3,6 +3,5 @@ require("core.keymaps")
 require("core.autocommands")
 require("core.lazy")
 
+-- TODO:
 require("modules.statusline")
-
-vim.cmd.colorscheme("moonfly")
