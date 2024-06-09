@@ -179,6 +179,11 @@ return {
 		},
 	},
 
+	{ -- Btter nvim UI
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+
 	{ -- File explorer
 		"stevearc/oil.nvim",
 		opts = {
