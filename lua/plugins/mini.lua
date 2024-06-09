@@ -18,12 +18,6 @@ return {
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
 
-			-- Minimal file explorer
-			require("mini.files").setup({
-				vim.keymap.set("n", "-", ":lua MiniFiles.open()<cr>", { noremap = true, silent = true }),
-				config = function() end,
-			})
-
 			-- Better bracket movement
 			require("mini.bracketed").setup()
 
