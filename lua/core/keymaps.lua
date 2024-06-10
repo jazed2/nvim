@@ -60,3 +60,16 @@ cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q')
 cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 ]])
+
+-- Toggle tabline
+vim.opt.showtabline = 0
+_G.toggle_tabline = function()
+	local showtabline = vim.api.nvim_get_option("showtabline")
+	if showtabline > 0 then
+		vim.api.nvim_set_option("showtabline", 0) -- disable tabline
+	else
+		vim.api.nvim_set_option("showtabline", 2) -- always show tabline
+	end
+end
+vim.cmd("command! ToggleTabline lua toggle_tabline()")
+keymap("", "<leader>bt", "<cmd>ToggleTabline<cr>", opts)
