@@ -30,7 +30,7 @@ return {
 			"gzip",
 			-- "matchit",
 			-- "matchparen",
-			-- "netrwPlugin",
+			"netrwPlugin",
 			"rplugin",
 			"tarPlugin",
 			"tohtml",

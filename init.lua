@@ -3,5 +3,5 @@ require("core.keymaps")
 require("core.autocommands")
 require("core.lazy")
 
--- TODO:
+-- NOTE: WIP
 require("modules.statusline")

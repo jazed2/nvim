@@ -3,6 +3,7 @@ return {
 		"Mofiqul/adwaita.nvim",
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		lazy = false,
+		event = "VimEnter",
 		-- configure and set on startup
 		config = function()
 			vim.g.adwaita_darker = false -- for darker version
@@ -13,21 +14,20 @@ return {
 
 	{
 		"bluz71/vim-moonfly-colors",
+		enabled = false,
 	},
 
 	{
 		"savq/melange-nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		lazy = false,
+		enabled = false,
 	},
 
 	{
 		"comfysage/evergarden",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		lazy = false,
 		opts = {
 			contrast_dark = "hard", -- 'hard'|'medium'|'soft'
 			overrides = {}, -- add custom overrides
 		},
+		enabled = false,
 	},
 }
