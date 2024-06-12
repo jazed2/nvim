@@ -1,5 +1,4 @@
 return {
-
 	{ -- Collection of various small independent plugins/modules
 		"echasnovski/mini.nvim",
 		config = function()
@@ -23,9 +22,6 @@ return {
 
 			-- Move visual blocks with ALT + {h,j,k,l}
 			require("mini.move").setup()
-
-			-- Automatically add closing bracket/quote
-			require("mini.pairs").setup()
 
 			-- Split or join with gS
 			require("mini.splitjoin").setup()
