@@ -59,10 +59,103 @@ return {
 		},
 	},
 
-	{ -- Auto html tags
-		"windwp/nvim-ts-autotag",
-		config = function()
-			require("nvim-ts-autotag").setup({})
+	{ -- Obsidian.nvim
+		"epwalsh/obsidian.nvim",
+		version = "*",
+		lazy = true,
+		ft = "markdown",
+		event = "InsertEnter",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"iBhagwan/fzf-lua",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter",
+		},
+		opts = {
+			vim.opt.conceallevel == 2,
+			workspaces = {
+				{
+					name = "C_vault",
+					path = "$HOME/repos/study/C-lang/C_vault",
+				},
+			},
+			completion = {
+				nvim_cmp = true,
+				min_chars = 2,
+			},
+			mappings = {
+				["<CR>"] = { -- Smart action: If cursor on checkbox then toggle checkbox, if cursor on link then follow link
+					action = function()
+						return require("obsidian").util.smart_action()
+					end,
+					opts = { buffer = true, expr = true },
+				},
+			},
+			new_notes_location = "current_dir",
+			open_app_foreground = true,
+			follow_url_func = function(url)
+				vim.fn.jobstart({ "xdg-open", url })
+			end,
+			ui = {
+				enable = true,
+				update_debounce = 200,
+				max_file_length = 5000,
+				checkboxes = {
+					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+					[" "] = { char = "󰄱 ", hl_group = "ObsidianTodo" },
+					["x"] = { char = " ", hl_group = "ObsidianDone" },
+					[">"] = { char = " ", hl_group = "ObsidianRightArrow" },
+					["~"] = { char = "󰰱 ", hl_group = "ObsidianTilde" },
+					["!"] = { char = " ", hl_group = "ObsidianImportant" },
+					-- You can also add more custom ones...
+				},
+				-- Use bullet marks for non-checkbox lists.
+				bullets = { char = "•", hl_group = "ObsidianBullet" },
+				external_link_icon = { char = " ", hl_group = "ObsidianExtLinkIcon" },
+				-- Replace the above with this if you don't have a patched font:
+				-- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+				reference_text = { hl_group = "ObsidianRefText" },
+				highlight_text = { hl_group = "ObsidianHighlightText" },
+				tags = { hl_group = "ObsidianTag" },
+				block_ids = { hl_group = "ObsidianBlockID" },
+				hl_groups = {
+					ObsidianTodo = { bold = true, fg = "#f78c6c" },
+					ObsidianDone = { bold = true, fg = "#89ddff" },
+					ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
+					ObsidianTilde = { bold = true, fg = "#ff5370" },
+					ObsidianImportant = { bold = true, fg = "#d73128" },
+					ObsidianBullet = { bold = true, fg = "#89ddff" },
+					ObsidianRefText = { underline = true, fg = "#c792ea" },
+					ObsidianExtLinkIcon = { fg = "#c792ea" },
+					ObsidianTag = { italic = true, fg = "#89ddff" },
+					ObsidianBlockID = { italic = true, fg = "#89ddff" },
+					ObsidianHighlightText = { bg = "#75662e" },
+				},
+			},
+		},
+	},
+
+	{ -- Create, manage, delete neovim session
+		"gennaro-tedesco/nvim-possession",
+		dependencies = {
+			"ibhagwan/fzf-lua",
+		},
+		config = true,
+		init = function()
+			local possession = require("nvim-possession")
+			vim.keymap.set("n", "<leader>kl", function()
+				possession.list()
+			end, { desc = "List Sessions" })
+			vim.keymap.set("n", "<leader>kn", function()
+				possession.new()
+			end, { desc = "Create new session" })
+			vim.keymap.set("n", "<leader>ku", function()
+				possession.update()
+			end, { desc = "Update current session, if new buffers are open" })
+			vim.keymap.set("n", "<leader>kd", function()
+				possession.delete()
+			end, { desc = "Delete current session" })
 		end,
 	},
 }
