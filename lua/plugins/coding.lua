@@ -139,8 +139,19 @@ return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		requires = { "tadmccorkle/markdown.nvim" },
 		opts = {
-			ensure_installed = { "bash", "c", "html", "lua", "luadoc", "markdown", "vim", "vimdoc" },
+			ensure_installed = {
+				"bash",
+				"c",
+				"html",
+				"lua",
+				"luadoc",
+				"vim",
+				"vimdoc",
+				"markdown",
+				"markdown_inline",
+			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
@@ -151,6 +162,10 @@ return {
 				additional_vim_regex_highlighting = { "ruby" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
+
+			markdown = {
+				enable = true,
+			},
 		},
 		config = function(_, opts)
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
