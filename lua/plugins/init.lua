@@ -110,47 +110,78 @@ return {
 			end, { desc = "Delete current session" })
 		end,
 	},
+
+	{ -- Obsidian nvim integration
 		"epwalsh/obsidian.nvim",
 		version = "*",
-		lazy = true,
 		ft = "markdown",
-		event = "InsertEnter",
+
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"iBhagwan/fzf-lua",
 			"hrsh7th/nvim-cmp",
-			"nvim-telescope/telescope.nvim",
+			"iBhagwan/fzf-lua",
 			"nvim-treesitter",
 		},
+
 		opts = {
-			vim.opt.conceallevel == 2,
 			workspaces = {
+				-- {
+				-- 	name = "C_vault",
+				-- 	path = "~/repos/study/C-lang/C_vault",
+				-- },
+
 				{
-					name = "C_vault",
-					path = "$HOME/repos/study/C-lang/C_vault",
+					name = "no-vault",
+					path = function()
+						return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+					end,
+					overrides = {
+						notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
+						new_notes_location = "current_dir",
+						templates = {
+							folder = vim.NIL,
+						},
+						disable_frontmatter = true,
+					},
 				},
 			},
-			completion = {
-				nvim_cmp = true,
-				min_chars = 2,
-			},
+
 			mappings = {
-				["<CR>"] = { -- Smart action: If cursor on checkbox then toggle checkbox, if cursor on link then follow link
+				[";fl"] = {
+					action = function()
+						return require("obsidian").util.gf_passthrough()
+					end,
+					opts = { noremap = false, expr = true, buffer = true },
+				},
+
+				["<cr>"] = {
 					action = function()
 						return require("obsidian").util.smart_action()
 					end,
 					opts = { buffer = true, expr = true },
 				},
 			},
-			new_notes_location = "current_dir",
-			open_app_foreground = true,
+
+			open_app_foreground = false,
+
+			picker = {
+				name = "fzf-lua",
+				mappings = {
+					new = "<C-x>",
+					insert_link = "<C-l>",
+				},
+			},
+
+			---@param url string
 			follow_url_func = function(url)
 				vim.fn.jobstart({ "xdg-open", url })
 			end,
+
 			ui = {
-				enable = true,
-				update_debounce = 200,
-				max_file_length = 5000,
+				enable = true, -- set to false to disable all additional syntax features
+				update_debounce = 200, -- update delay after a text change (in milliseconds)
+				max_file_length = 5000, -- disable UI features for files with more than this many lines
+				-- Define how various check-boxes are displayed
 				checkboxes = {
 					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
 					[" "] = { char = "󰄱 ", hl_group = "ObsidianTodo" },
@@ -161,7 +192,7 @@ return {
 					-- You can also add more custom ones...
 				},
 				-- Use bullet marks for non-checkbox lists.
-				bullets = { char = "•", hl_group = "ObsidianBullet" },
+				bullets = { char = "", hl_group = "ObsidianBullet" },
 				external_link_icon = { char = " ", hl_group = "ObsidianExtLinkIcon" },
 				-- Replace the above with this if you don't have a patched font:
 				-- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
@@ -170,6 +201,7 @@ return {
 				tags = { hl_group = "ObsidianTag" },
 				block_ids = { hl_group = "ObsidianBlockID" },
 				hl_groups = {
+					-- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
 					ObsidianTodo = { bold = true, fg = "#f78c6c" },
 					ObsidianDone = { bold = true, fg = "#89ddff" },
 					ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
