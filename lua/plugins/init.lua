@@ -33,6 +33,7 @@ return {
 			require("mini.splitjoin").setup()
 		end,
 	},
+
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
@@ -87,7 +88,6 @@ return {
 		},
 	},
 
-	{ -- Obsidian.nvim
 	{ -- Create, manage, delete neovim session
 		"gennaro-tedesco/nvim-possession",
 		dependencies = {
@@ -218,26 +218,45 @@ return {
 		},
 	},
 
-	{ -- Create, manage, delete neovim session
-		"gennaro-tedesco/nvim-possession",
-		dependencies = {
-			"ibhagwan/fzf-lua",
-		},
-		config = true,
-		init = function()
-			local possession = require("nvim-possession")
-			vim.keymap.set("n", "<leader>kl", function()
-				possession.list()
-			end, { desc = "List Sessions" })
-			vim.keymap.set("n", "<leader>kn", function()
-				possession.new()
-			end, { desc = "Create new session" })
-			vim.keymap.set("n", "<leader>ku", function()
-				possession.update()
-			end, { desc = "Update current session, if new buffers are open" })
-			vim.keymap.set("n", "<leader>kd", function()
-				possession.delete()
-			end, { desc = "Delete current session" })
+	{ -- Markdown previewing in browser
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+
+		config = function()
+			vim.cmd([[do FileType]])
+			vim.cmd([[
+			function OpenMarkdownPreview (url)
+			let cmd = "surf -bdfIK " . shellescape(a:url) . " &"
+			silent call system(cmd)
+			endfunction
+			]])
+			vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
+
+			vim.g.mkdp_open_ip = "127.0.0.1"
+			vim.g.mkdp_port = 6942
+		end,
+
+		vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { noremap = true, silent = true }),
+	},
+
+	{ -- Markdown preview in terminal
+		"ellisonleao/glow.nvim",
+		cmd = "Glow",
+		ft = "markdown",
+
+		config = function()
+			require("glow").setup({
+				border = "shadow", -- floating window border config
+				style = "dark", -- filled automatically with your current editor background, you can override using glow json style
+				pager = true,
+				width = 1200,
+				height = 1200,
+			})
 		end,
 	},
 }
