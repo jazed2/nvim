@@ -82,3 +82,6 @@ opt.backspace = { "start", "eol", "indent" }
 
 -- Easier file search
 opt.path:append({ "**" })
+
+-- Conceal level for obsidian-nvim
+opt.conceallevel = 2

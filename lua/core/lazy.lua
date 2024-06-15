@@ -38,4 +38,9 @@ return {
 			"zipPlugin",
 		},
 	},
+	change_detection = { notify = false },
+	checker = {
+		enabled = true, -- automatically check for plugin updates
+		notify = false, -- get a notification when new updates are found
+	},
 }
