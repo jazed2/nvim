@@ -15,7 +15,7 @@ return {
 			-- used for completion, annotations and signatures of Neovim apis
 			{ "folke/neodev.nvim", opts = {} },
 
-			{
+			{ -- Code navigation
 				"SmiteshP/nvim-navbuddy",
 				dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
 				opts = { lsp = { auto_attach = true } },
