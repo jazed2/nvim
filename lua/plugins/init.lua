@@ -88,6 +88,28 @@ return {
 	},
 
 	{ -- Obsidian.nvim
+	{ -- Create, manage, delete neovim session
+		"gennaro-tedesco/nvim-possession",
+		dependencies = {
+			"ibhagwan/fzf-lua",
+		},
+		config = true,
+		init = function()
+			local possession = require("nvim-possession")
+			vim.keymap.set("n", "<leader>kl", function()
+				possession.list()
+			end, { desc = "List Sessions" })
+			vim.keymap.set("n", "<leader>kn", function()
+				possession.new()
+			end, { desc = "Create new session" })
+			vim.keymap.set("n", "<leader>ku", function()
+				possession.update()
+			end, { desc = "Update current session, if new buffers are open" })
+			vim.keymap.set("n", "<leader>kd", function()
+				possession.delete()
+			end, { desc = "Delete current session" })
+		end,
+	},
 		"epwalsh/obsidian.nvim",
 		version = "*",
 		lazy = true,
