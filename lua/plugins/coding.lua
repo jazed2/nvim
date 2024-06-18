@@ -185,8 +185,8 @@ return {
 	{ -- Automatic closing bracket and tags pairs based on rules
 		{ -- For auto brackets and quotes
 			"windwp/nvim-autopairs",
-
 			event = "InsertEnter",
+
 			config = function()
 				local npairs = require("nvim-autopairs")
 				local Rule = require("nvim-autopairs.rule")
