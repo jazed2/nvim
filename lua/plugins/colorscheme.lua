@@ -1,12 +1,11 @@
 return {
 	{
 		"Mofiqul/adwaita.nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		lazy = false,
 		event = "VimEnter",
+		lazy = false,
 		-- configure and set on startup
 		config = function()
-			vim.g.adwaita_darker = false -- for darker version
+			vim.g.adwaita_darker = true -- for darker version
 			vim.g.adwaita_transparent = false -- makes the background transparent
 			vim.cmd.colorscheme("adwaita")
 		end,
@@ -14,12 +13,12 @@ return {
 
 	{
 		"bluz71/vim-moonfly-colors",
-		enabled = false,
+		enabled = true,
 	},
 
 	{
 		"savq/melange-nvim",
-		enabled = false,
+		enabled = true,
 	},
 
 	{
