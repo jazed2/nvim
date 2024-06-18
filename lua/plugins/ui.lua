@@ -337,32 +337,6 @@ return {
 		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
 	},
 
-	{ -- ZenMode
-		"folke/zen-mode.nvim",
-		dependencies = "folke/twilight.nvim",
-		vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true }),
-		opts = {
-			window = {
-				options = {
-					signcolumn = "no",
-					number = false,
-					relativenumber = false,
-					cursorcolumn = false,
-					foldcolumn = "0",
-				},
-			},
-			plugins = {
-				alacritty = { enabled = true, font = "10" },
-				tmux = { enabled = false },
-			},
-			-- callback where you can add custom code when the Zen window opens
-			-- No need to add *on_close* callback to reload folds
-			on_open = function(win)
-				vim.cmd("%foldopen")
-			end,
-		},
-	},
-
 	{ -- Statusline
 		"bluz71/nvim-linefly",
 		config = function()
@@ -375,8 +349,8 @@ return {
 				warning_symbol = "W",
 				information_symbol = "I",
 				ellipsis_symbol = "…",
-				tabline = false,
-				winbar = true,
+				tabline = true,
+				-- winbar = true,
 				with_file_icon = true,
 				with_git_branch = true,
 				with_git_status = true,
