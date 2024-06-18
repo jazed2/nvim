@@ -73,3 +73,15 @@ _G.toggle_tabline = function()
 end
 vim.cmd("command! ToggleTabline lua toggle_tabline()")
 keymap("", "<leader>bt", "<cmd>ToggleTabline<cr>", opts)
+
+-- Scroll keybinds
+keymap({ "n", "v" }, "<C-u>", "<C-u>zz", { desc = "Better half up scroll", remap = true })
+keymap({ "n", "v" }, "<C-d>", "<C-d>zz", { desc = "Better half down scroll", remap = true })
+keymap("n", "n", "nzzzv", { desc = "Center text when searching", silent = true })
+keymap("n", "N", "Nzzzv", { desc = "Center text when searching", silent = true })
+
+-- Fixing bad habits
+keymap("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+keymap("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+keymap("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+keymap("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')

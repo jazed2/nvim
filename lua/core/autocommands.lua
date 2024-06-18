@@ -20,3 +20,16 @@ autocmd({ "BufWinEnter", "BufRead" }, { -- Reload folds
 	desc = "Load folds when entering",
 	command = "silent! loadview 1",
 })
+
+autocmd("BufWinEnter", { -- Open :h in vertical split on right
+	group = augroup("help_window_right", {}),
+	pattern = { "*.txt" },
+	callback = function()
+		if vim.o.filetype == "help" then
+			vim.cmd([[
+        wincmd L
+        vertical resize 90
+      ]])
+		end
+	end,
+})

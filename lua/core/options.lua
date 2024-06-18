@@ -63,6 +63,10 @@ opt.inccommand = "split"
 
 -- Show which line your cursor is on
 opt.cursorline = true
+opt.cursorlineopt = "number"
+
+-- Primagen style colorcolumn
+opt.colorcolumn = "120"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 10
@@ -85,3 +89,21 @@ opt.path:append({ "**" })
 
 -- Conceal level for obsidian-nvim
 opt.conceallevel = 2
+
+-- Desiable adding comment when pressing `o`
+opt.formatoptions:remove("o")
+
+-- Set spell checking
+opt.spell = false
+opt.spelllang = "en_us"
+
+-- Disable swap file, allows file to edited by different windows
+opt.swapfile = false
+
+-- Something related to search
+vim.opt.wildmenu = true
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wildoptions = "pum"
+
+-- Jumplist for superfast
+vim.opt.jumpoptions = "stack,view"
