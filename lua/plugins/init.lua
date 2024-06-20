@@ -2,6 +2,9 @@ return {
 	-- Automatic tabstop and shift width
 	{ "tpope/vim-sleuth" },
 
+	-- Undotree
+	{ "mbbill/undotree", vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" }) },
+
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
 
