@@ -130,114 +130,11 @@ return {
 		},
 	},
 
-
-	{ -- Obsidian nvim integration
-		"epwalsh/obsidian.nvim",
-		version = "*",
-		ft = "markdown",
-
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-			"iBhagwan/fzf-lua",
-			"nvim-treesitter",
-		},
 	{ -- Persist sessions
 		"folke/persistence.nvim",
 		event = "BufReadPre",
 
 		opts = {
-			workspaces = {
-				-- {
-				-- 	name = "C_vault",
-				-- 	path = "~/repos/study/C-lang/C_vault",
-				-- },
-
-				{
-					name = "no-vault",
-					path = function()
-						return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-					end,
-					overrides = {
-						notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
-						new_notes_location = "current_dir",
-						templates = {
-							folder = vim.NIL,
-						},
-						disable_frontmatter = true,
-					},
-				},
-			},
-
-			mappings = {
-				[";fl"] = {
-					action = function()
-						return require("obsidian").util.gf_passthrough()
-					end,
-					opts = { noremap = false, expr = true, buffer = true },
-				},
-
-				["<cr>"] = {
-					action = function()
-						return require("obsidian").util.smart_action()
-					end,
-					opts = { buffer = true, expr = true },
-				},
-			},
-
-			open_app_foreground = false,
-
-			picker = {
-				name = "fzf-lua",
-				mappings = {
-					new = "<C-x>",
-					insert_link = "<C-l>",
-				},
-			},
-
-			---@param url string
-			follow_url_func = function(url)
-				vim.fn.jobstart({ "xdg-open", url })
-			end,
-
-			ui = {
-				enable = true, -- set to false to disable all additional syntax features
-				update_debounce = 200, -- update delay after a text change (in milliseconds)
-				max_file_length = 5000, -- disable UI features for files with more than this many lines
-				-- Define how various check-boxes are displayed
-				checkboxes = {
-					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
-					[" "] = { char = "󰄱 ", hl_group = "ObsidianTodo" },
-					["x"] = { char = " ", hl_group = "ObsidianDone" },
-					[">"] = { char = " ", hl_group = "ObsidianRightArrow" },
-					["~"] = { char = "󰰱 ", hl_group = "ObsidianTilde" },
-					["!"] = { char = " ", hl_group = "ObsidianImportant" },
-					-- You can also add more custom ones...
-				},
-				-- Use bullet marks for non-checkbox lists.
-				bullets = { char = "", hl_group = "ObsidianBullet" },
-				external_link_icon = { char = " ", hl_group = "ObsidianExtLinkIcon" },
-				-- Replace the above with this if you don't have a patched font:
-				-- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
-				reference_text = { hl_group = "ObsidianRefText" },
-				highlight_text = { hl_group = "ObsidianHighlightText" },
-				tags = { hl_group = "ObsidianTag" },
-				block_ids = { hl_group = "ObsidianBlockID" },
-				hl_groups = {
-					-- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
-					ObsidianTodo = { bold = true, fg = "#f78c6c" },
-					ObsidianDone = { bold = true, fg = "#89ddff" },
-					ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
-					ObsidianTilde = { bold = true, fg = "#ff5370" },
-					ObsidianImportant = { bold = true, fg = "#d73128" },
-					ObsidianBullet = { bold = true, fg = "#89ddff" },
-					ObsidianRefText = { underline = true, fg = "#c792ea" },
-					ObsidianExtLinkIcon = { fg = "#c792ea" },
-					ObsidianTag = { italic = true, fg = "#89ddff" },
-					ObsidianBlockID = { italic = true, fg = "#89ddff" },
-					ObsidianHighlightText = { bg = "#75662e" },
-				},
-			},
 			dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
 			options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
 			pre_save = nil, -- a function to call before saving the session
