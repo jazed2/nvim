@@ -6,19 +6,6 @@ return {
 		opts = { signs = true },
 	},
 
-	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-			},
-		},
-	},
-
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
@@ -129,22 +116,6 @@ return {
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
-	},
-
-	{ -- LazyGit integration with Telescope
-		"kdheepak/lazygit.nvim",
-		keys = {
-			{
-				"<leader>lg",
-				":LazyGit<Return>",
-				silent = true,
-				noremap = true,
-			},
-		},
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
 	},
 
 	{ -- Btter nvim UI
