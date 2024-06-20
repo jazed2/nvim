@@ -21,10 +21,23 @@ return {
 
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-			-- - sd'   - [S]urround [D]elete [']quotes
-			-- - sr)'  - [S]urround [R]eplace [)] [']
-			require("mini.surround").setup()
+			-- - ysaiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+			-- - ysd'   - [S]urround [D]elete [']quotes
+			-- - ysr)'  - [S]urround [R]eplace [)] [']
+			require("mini.surround").setup({
+				mappings = {
+					add = "ysa", -- Add surrounding in Normal and Visual modes
+					delete = "ysd", -- Delete surrounding
+					find = "ysf", -- Find surrounding (to the right)
+					find_left = "ysF", -- Find surrounding (to the left)
+					highlight = "ysh", -- Highlight surrounding
+					replace = "ysr", -- Replace surrounding
+					update_n_lineys = "ysn", -- Update `n_lines`
+
+					suffix_last = "l", -- Suffix to search with "prev" method
+					suffix_next = "n", -- Suffix to search with "next" method
+				},
+			})
 
 			-- Better bracket movement
 			require("mini.bracketed").setup()
