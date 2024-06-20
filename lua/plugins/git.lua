@@ -8,6 +8,7 @@ return {
 			{
 				"<leader>lg",
 				":LazyGit<Return>",
+				desc = "Lazy git UI",
 				silent = true,
 				noremap = true,
 			},

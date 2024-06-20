@@ -318,7 +318,7 @@ return {
 		},
 		cmd = "Neotree",
 		keys = {
-			{ "<leader><TAB>", ":Neotree reveal<CR>", { desc = "NeoTree reveal" } },
+			{ "<leader><TAB>", ":Neotree reveal<CR>", desc = "NeoTree reveal" },
 		},
 		opts = {
 			filesystem = {

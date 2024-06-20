@@ -144,15 +144,30 @@ return {
 			post_load = nil, -- a function to call after loading the session
 		},
 
-		vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {}),
-		vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {}),
-		vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {}),
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>Ss",
+			[[<cmd>lua require("persistence").load()<cr>]],
+			{ desc = "Load session" }
+		),
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>Sl",
+			[[<cmd>lua require("persistence").load({ last = true })<cr>]],
+			{ desc = "Load last session" }
+		),
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>Sd",
+			[[<cmd>lua require("persistence").stop()<cr>]],
+			{ desc = "Pause persistence" }
+		),
 	},
 
 	{ -- Markdown previewing in browser
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
+		ft = "markdown",
 
 		build = function()
 			vim.fn["mkdp#util#install"]()
