@@ -39,8 +39,25 @@ return {
 				},
 			})
 
-			-- Better bracket movement
-			require("mini.bracketed").setup()
+			-- Quicker movement with brackets
+			require("mini.bracketed").setup({
+				--   Supply empty string `''` to not create mappings.
+				-- See `:h MiniBracketed.config` for more info.
+				buffer = { suffix = "b", options = {} }, -- Buffer
+				comment = { suffix = "c", options = {} }, -- Comment Block
+				conflict = { suffix = "x", options = {} }, -- Conflict Marker
+				diagnostic = { suffix = "d", options = {} }, -- Diagnostic
+				file = { suffix = "f", options = {} }, -- File on Disk
+				indent = { suffix = "i", options = {} }, -- Indent Change
+				jump = { suffix = "j", options = {} }, -- Jump from jumplist inside current buffer
+				location = { suffix = "l", options = {} }, -- Location from location list
+				oldfile = { suffix = "o", options = {} }, -- Old files
+				quickfix = { suffix = "q", options = {} }, -- Quickfix entries from quickfix list
+				treesitter = { suffix = "t", options = {} }, -- Tree-sitter node and parent
+				undo = { suffix = "u", options = {} }, -- Undo states from specially tracked linear history
+				window = { suffix = "w", options = {} }, -- Window in current tab
+				yank = { suffix = "y", options = {} }, -- Yank selection replacing latest put region
+			})
 
 			-- Move visual blocks with ALT + {h,j,k,l}
 			require("mini.move").setup()
