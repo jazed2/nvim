@@ -5,7 +5,9 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ import = "plugins" })
+require("lazy").setup({
+	{ import = "plugins" },
+})
 
 return {
 	ui = { -- Fallback icons when no nerdfont is installed
