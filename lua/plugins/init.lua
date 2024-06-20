@@ -130,28 +130,6 @@ return {
 		},
 	},
 
-	{ -- Create, manage, delete neovim session
-		"gennaro-tedesco/nvim-possession",
-		dependencies = {
-			"ibhagwan/fzf-lua",
-		},
-		config = true,
-		init = function()
-			local possession = require("nvim-possession")
-			vim.keymap.set("n", "<leader>kl", function()
-				possession.list()
-			end, { desc = "List Sessions" })
-			vim.keymap.set("n", "<leader>kn", function()
-				possession.new()
-			end, { desc = "Create new session" })
-			vim.keymap.set("n", "<leader>ku", function()
-				possession.update()
-			end, { desc = "Update current session, if new buffers are open" })
-			vim.keymap.set("n", "<leader>kd", function()
-				possession.delete()
-			end, { desc = "Delete current session" })
-		end,
-	},
 
 	{ -- Obsidian nvim integration
 		"epwalsh/obsidian.nvim",
@@ -164,6 +142,9 @@ return {
 			"iBhagwan/fzf-lua",
 			"nvim-treesitter",
 		},
+	{ -- Persist sessions
+		"folke/persistence.nvim",
+		event = "BufReadPre",
 
 		opts = {
 			workspaces = {
@@ -257,7 +238,18 @@ return {
 					ObsidianHighlightText = { bg = "#75662e" },
 				},
 			},
+			dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
+			options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
+			pre_save = nil, -- a function to call before saving the session
+			post_save = nil, -- a function to call after saving the session
+			save_empty = false, -- don't save if there are no open file buffers
+			pre_load = nil, -- a function to call before loading the session
+			post_load = nil, -- a function to call after loading the session
 		},
+
+		vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {}),
+		vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {}),
+		vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {}),
 	},
 
 	{ -- Markdown previewing in browser
