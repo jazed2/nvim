@@ -17,6 +17,7 @@ return {
 			-- Add your own debuggers here
 			"leoluz/nvim-dap-go",
 		},
+		event = "BufWinEnter",
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
@@ -142,6 +143,7 @@ return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		events = { "BufRead", "BufNewFile" },
 		requires = { "tadmccorkle/markdown.nvim" },
 		opts = {
 			ensure_installed = {
@@ -233,7 +235,13 @@ return {
 
 		{ -- Auto tags for html
 			"windwp/nvim-ts-autotag",
-			events = { "BufReadPre", "BufNewFile" },
+			filetype = {
+				"html",
+				"js",
+				"ts",
+				"jsx",
+				"tsx",
+			},
 
 			config = function()
 				require("nvim-ts-autotag").setup({

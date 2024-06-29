@@ -1,6 +1,7 @@
 return {
 	{ -- Nvim Tmux navigation
 		"alexghergh/nvim-tmux-navigation",
+		event = "VimEnter",
 		config = function()
 			local nvim_tmux_nav = require("nvim-tmux-navigation")
 
@@ -29,6 +30,7 @@ return {
 
 	{ -- Enhanced f/t motions for Leap
 		"ggandor/flit.nvim",
+		event = "BufRead",
 		dependencies = {
 			"ggandor/leap.nvim",
 			keys = {

@@ -1,7 +1,6 @@
 return {
 	{
 		"Mofiqul/adwaita.nvim",
-		event = "VimEnter",
 		lazy = false,
 		-- configure and set on startup
 		config = function()
@@ -13,12 +12,12 @@ return {
 
 	{
 		"bluz71/vim-moonfly-colors",
-		enabled = true,
+		enabled = false,
 	},
 
 	{
 		"savq/melange-nvim",
-		enabled = true,
+		enabled = false,
 	},
 
 	{
