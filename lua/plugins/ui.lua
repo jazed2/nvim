@@ -1,4 +1,5 @@
 return {
+
 	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
@@ -9,6 +10,7 @@ return {
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
+		event = "VimEnter",
 
 		config = function()
 			local ufo = require("ufo")
@@ -121,6 +123,7 @@ return {
 	{ -- Btter nvim UI
 		"stevearc/dressing.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
+		event = "VimEnter",
 		opts = {},
 		config = function()
 			require("dressing").setup({
@@ -290,49 +293,9 @@ return {
 		end,
 	},
 
-	{ -- File explorer
-		"stevearc/oil.nvim",
-		opts = {
-			skip_confirm_for_simple_edits = true,
-			view_options = {
-				show_hidden = true,
-				-- This function defines what is considered a "hidden" file
-				is_hidden_file = function(name, bufnr)
-					return vim.startswith(name, ".")
-				end,
-				natural_order = true,
-			},
-		},
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
-	},
-
-	{ -- Neo tree
-		"nvim-neo-tree/neo-tree.nvim",
-		version = "*",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		},
-		cmd = "Neotree",
-		keys = {
-			{ "<leader><TAB>", ":Neotree reveal<CR>", desc = "NeoTree reveal" },
-		},
-		opts = {
-			filesystem = {
-				window = {
-					mappings = {
-						["<leader><TAB>"] = "close_window",
-					},
-				},
-			},
-		},
-	},
-
 	{ -- Statusline
 		"bluz71/nvim-linefly",
+		event = "VimEnter",
 		config = function()
 			vim.g.linefly_options = { -- opts
 				separator_symbol = "⎪",

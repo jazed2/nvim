@@ -1,50 +1,17 @@
 return {
-	{ -- LSP Configuration & Plugins
+
+	{ -- LSP config
 		"neovim/nvim-lspconfig",
+		event = "BufRead",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
-			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
 
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
 			{ "folke/neodev.nvim", opts = {} },
-
-			{ -- Code navigation
-				"SmiteshP/nvim-navbuddy",
-				dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
-				opts = { lsp = { auto_attach = true } },
-			},
-
-			{ -- Show references and definition info on functions
-				"VidocqH/lsp-lens.nvim",
-				enable = true,
-				config = function()
-					local SymbolKind = vim.lsp.protocol.SymbolKind
-
-					require("lsp-lens").setup({
-						include_declaration = false, -- Reference include declaration
-						sections = { -- Enable / Disable specific request, formatter example looks 'Format Requests'
-							definition = false,
-							references = true,
-							implements = true,
-							git_authors = true,
-						},
-						ignore_filetype = {
-							"prisma",
-						},
-						-- Target Symbol Kinds to show lens information
-						target_symbol_kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface },
-						-- Symbol Kinds that may have target symbol kinds as children
-						wrapper_symbol_kinds = { SymbolKind.Class, SymbolKind.Struct },
-					})
-				end,
-			},
 		},
 		config = function()
 			-- Brief aside: **What is LSP?**
