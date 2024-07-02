@@ -1,4 +1,5 @@
 return { -- Dashboard
+
 	"goolord/alpha-nvim",
 
 	opts = function()

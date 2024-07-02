@@ -1,7 +1,9 @@
 return {
+
 	{ -- DAP and debugging utils
 		-- NOTE: Yes, you can install new plugins here!
 		"mfussenegger/nvim-dap",
+		event = "BufWinEnter",
 		-- NOTE: And you can specify dependencies as well
 		dependencies = {
 			-- Creates a beautiful debugger UI
@@ -185,75 +187,5 @@ return {
 			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
-	},
-
-	{ -- Automatic closing bracket and tags pairs based on rules
-		{ -- For auto brackets and quotes
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-
-			config = function()
-				local npairs = require("nvim-autopairs")
-				local Rule = require("nvim-autopairs.rule")
-
-				npairs.setup({
-
-					enable_check_bracket_line = false,
-
-					check_ts = true,
-					ts_config = {
-						lua = { "string" }, -- it will not add a pair on that treesitter node
-						javascript = { "template_string" },
-					},
-
-					fast_wrap = {
-						map = "<a-e>",
-						chars = { "{", "[", "(", '"', "'" },
-						pattern = [=[[%'%"%>%]%)%}%,]]=],
-						end_key = "$",
-						before_key = "h",
-						after_key = "l",
-						cursor_pos_before = true,
-						keys = "qwertyuiopzxcvbnmasdfghjkl",
-						manual_position = true,
-						highlight = "Search",
-						highlight_grey = "Comment",
-					},
-				})
-
-				local ts_conds = require("nvim-autopairs.ts-conds")
-
-				-- press % => %% only while inside a comment or string
-				npairs.add_rules({
-					Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
-					Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({ "function" })),
-				})
-
-				require("nvim-ts-autotag").setup({})
-			end,
-		},
-
-		{ -- Auto tags for html
-			"windwp/nvim-ts-autotag",
-			filetype = {
-				"html",
-				"js",
-				"ts",
-				"jsx",
-				"tsx",
-			},
-
-			config = function()
-				require("nvim-ts-autotag").setup({
-
-					opts = {
-						-- Defaults
-						enable_close = true, -- Auto close tags
-						enable_rename = true, -- Auto rename pairs of tags
-						enable_close_on_slash = false, -- Auto close on trailing </
-					},
-				})
-			end,
-		},
 	},
 }

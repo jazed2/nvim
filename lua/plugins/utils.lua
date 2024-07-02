@@ -1,12 +1,92 @@
 return {
+
 	-- Automatic tabstop and shift width
 	{ "tpope/vim-sleuth" },
 
 	-- Undotree
-	{ "mbbill/undotree", vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree Toggle" }) },
+	{
+		"mbbill/undotree",
+		event = "BufReadPre",
+		vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree Toggle" }),
+	},
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"numToStr/Comment.nvim",
+		event = "VimEnter",
+		opts = {},
+	},
+
+	{ -- Automatic closing bracket and tags pairs based on rules
+
+		{ -- For auto brackets and quotes
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+
+			config = function()
+				local npairs = require("nvim-autopairs")
+				local Rule = require("nvim-autopairs.rule")
+
+				npairs.setup({
+
+					enable_check_bracket_line = false,
+
+					check_ts = true,
+					ts_config = {
+						lua = { "string" }, -- it will not add a pair on that treesitter node
+						javascript = { "template_string" },
+					},
+
+					fast_wrap = {
+						map = "<a-e>",
+						chars = { "{", "[", "(", '"', "'" },
+						pattern = [=[[%'%"%>%]%)%}%,]]=],
+						end_key = "$",
+						before_key = "h",
+						after_key = "l",
+						cursor_pos_before = true,
+						keys = "qwertyuiopzxcvbnmasdfghjkl",
+						manual_position = true,
+						highlight = "Search",
+						highlight_grey = "Comment",
+					},
+				})
+
+				local ts_conds = require("nvim-autopairs.ts-conds")
+
+				-- press % => %% only while inside a comment or string
+				npairs.add_rules({
+					Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
+					Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({ "function" })),
+				})
+
+				require("nvim-ts-autotag").setup({})
+			end,
+		},
+
+		{ -- Auto tags for html
+			"windwp/nvim-ts-autotag",
+			filetype = {
+				"html",
+				"js",
+				"ts",
+				"jsx",
+				"tsx",
+			},
+
+			config = function()
+				require("nvim-ts-autotag").setup({
+
+					opts = {
+						-- Defaults
+						enable_close = true, -- Auto close tags
+						enable_rename = true, -- Auto rename pairs of tags
+						enable_close_on_slash = false, -- Auto close on trailing </
+					},
+				})
+			end,
+		},
+	},
 
 	{ -- Mini nvim collection
 		"echasnovski/mini.nvim",
@@ -88,6 +168,7 @@ return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		lazy = false,
+		event = "VimEnter",
 		keys = {
 			{
 				"<leader>f",
@@ -191,24 +272,9 @@ return {
 		vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { noremap = true, silent = true }),
 	},
 
-	{ -- Markdown preview in terminal
-		"ellisonleao/glow.nvim",
-		cmd = "Glow",
-		ft = "markdown",
-
-		config = function()
-			require("glow").setup({
-				border = "shadow", -- floating window border config
-				style = "dark", -- filled automatically with your current editor background, you can override using glow json style
-				pager = true,
-				width = 1200,
-				height = 1200,
-			})
-		end,
-	},
-
 	{ -- Spawn floating terminal inside nvim
 		"akinsho/toggleterm.nvim",
+		event = "BufRead",
 		version = "*",
 		config = function()
 			require("toggleterm").setup({
