@@ -2,7 +2,7 @@ return {
 
 	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
-		event = "VimEnter",
+		event = "BufRead",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = true },
 	},
@@ -10,7 +10,7 @@ return {
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		event = "VimEnter",
+		event = "BufWinEnter",
 
 		config = function()
 			local ufo = require("ufo")
@@ -86,7 +86,7 @@ return {
 
 	{ -- Show line indent
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VimEnter",
+		event = "BufReadPre",
 		dependencies = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		main = "ibl",
 		opts = {},
@@ -123,7 +123,7 @@ return {
 	{ -- Btter nvim UI
 		"stevearc/dressing.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
-		event = "VimEnter",
+		event = "BufReadPre",
 		opts = {},
 		config = function()
 			require("dressing").setup({
@@ -245,24 +245,6 @@ return {
 						min_height = 10,
 					},
 
-					-- Options for built-in selector
-					-- builtin = {
-					-- 	-- Display numbers for options and set up keymaps
-					-- 	show_numbers = true,
-					-- 	-- These are passed to nvim_open_win
-					-- 	border = "rounded",
-					-- 	-- 'editor' and 'win' will default to being centered
-					-- 	relative = "editor",
-					--
-					-- 	buf_options = {},
-					-- 	win_options = {
-					-- 		cursorline = true,
-					-- 		cursorlineopt = "both",
-					-- 	},
-
-					-- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-					-- the min_ and max_ options can be a list of mixed types.
-					-- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
 					width = nil,
 					max_width = { 140, 0.8 },
 					min_width = { 40, 0.2 },
@@ -295,7 +277,7 @@ return {
 
 	{ -- Statusline
 		"bluz71/nvim-linefly",
-		event = "VimEnter",
+		event = "BufWinEnter",
 		config = function()
 			vim.g.linefly_options = { -- opts
 				separator_symbol = "⎪",

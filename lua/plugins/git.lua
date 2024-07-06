@@ -1,10 +1,7 @@
 return {
-
-	-- Git related plugins
-	{ "tpope/vim-fugitive", "tpope/vim-rhubarb" },
-
 	{ -- LazyGit integration with Telescope
 		"kdheepak/lazygit.nvim",
+		event = "BufRead",
 		keys = {
 			{
 				"<leader>lg",
@@ -22,7 +19,7 @@ return {
 
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
-		event = "VimEnter",
+		event = "BufReadPre",
 		opts = {
 			signs = {
 				add = { text = "+" },

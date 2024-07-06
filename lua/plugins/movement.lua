@@ -21,7 +21,7 @@ return {
 
 	{ -- File and buffer bookmarks
 		"otavioschwanck/arrow.nvim",
-		event = "BufEnter",
+		event = "BufReadPre",
 		opts = {
 			show_icons = true,
 			leader_key = "\\", -- Recommended to be a single key
@@ -31,7 +31,7 @@ return {
 
 	{ -- Enhanced f/t motions for Leap
 		"ggandor/flit.nvim",
-		event = "BufRead",
+		event = "BufReadPre",
 		dependencies = {
 			"ggandor/leap.nvim",
 			keys = {
@@ -62,7 +62,7 @@ return {
 
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
-		event = "VimEnter",
+		cmd = "Telescope",
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -167,6 +167,7 @@ return {
 
 	{ -- gx
 		"chrishrb/gx.nvim",
+		event = "Bufread",
 		keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
 		cmd = { "Browse" },
 		dependencies = { "nvim-lua/plenary.nvim" },
