@@ -44,10 +44,10 @@ keymap("i", "jk", "<esc>", opts)
 keymap("i", "kj", "<esc>", opts)
 
 -- Split window
-keymap("n", "ss", ":split<Return>", opts)
-keymap("n", "sv", ":vsplit<Return>", opts)
+keymap("n", ";S", ":split<Return>", opts)
+keymap("n", ";V", ":vsplit<Return>", opts)
 
--- Resize with arrows when using multiple windows
+-- Resize Splits
 keymap("n", "<M-=>", "<C-w>+", opts)
 keymap("n", "<M-->", "<C-w>-", opts)
 keymap("n", "<M-.>", "<C-w><", opts)
