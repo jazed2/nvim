@@ -29,7 +29,7 @@ return {
 	},
 
 	change_detection = {
-		enabled = true,
+		enabled = false,
 		notify = false,
 	},
 
