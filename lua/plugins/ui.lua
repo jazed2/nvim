@@ -10,7 +10,8 @@ return {
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		event = "BufWinEnter",
+		cmd = { "Loadview", "Mkview" },
+		event = "BufReadPre",
 
 		config = function()
 			local ufo = require("ufo")
@@ -277,7 +278,7 @@ return {
 
 	{ -- Statusline
 		"bluz71/nvim-linefly",
-		event = "BufWinEnter",
+		event = "BufReadPre",
 		config = function()
 			vim.g.linefly_options = { -- opts
 				separator_symbol = "⎪",

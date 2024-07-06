@@ -168,7 +168,6 @@ return {
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		lazy = false,
 		event = "BufReadPre",
 		keys = {
 			{
@@ -215,7 +214,7 @@ return {
 
 	{ -- Persist sessions
 		"folke/persistence.nvim",
-		lazy = false,
+		cmd = "Lua require('persistence).load()",
 
 		opts = {
 			dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved

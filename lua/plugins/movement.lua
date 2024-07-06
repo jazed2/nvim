@@ -2,20 +2,20 @@ return {
 
 	{ -- Nvim Tmux navigation
 		"alexghergh/nvim-tmux-navigation",
-		event = "VimEnter",
+		keys = {
+			{ "<C-h>", "<cmd>NvimTmuxNavigateLeft<cr>" },
+			{ "<C-j>", "<cmd>NvimTmuxNavigateLeft<cr>" },
+			{ "<C-k>", "<cmd>NvimTmuxNavigateUp<cr>" },
+			{ "<C-l>", "<cmd>NvimTmuxNavigateRight<cr>" },
+			{ "<C-\\>", "<cmd>NvimTmuxNavigateLastActive<cr>" },
+			{ "<C-Space>", "<cmd>NvimTmuxNavigateNext<cr>" },
+		},
 		config = function()
 			local nvim_tmux_nav = require("nvim-tmux-navigation")
 
 			nvim_tmux_nav.setup({
 				disable_when_zoomed = true, -- defaults to false
 			})
-
-			vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-			vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-			vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-			vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-			vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-			vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
 		end,
 	},
 
@@ -31,7 +31,6 @@ return {
 
 	{ -- Enhanced f/t motions for Leap
 		"ggandor/flit.nvim",
-		event = "BufReadPre",
 		dependencies = {
 			"ggandor/leap.nvim",
 			keys = {
@@ -167,7 +166,6 @@ return {
 
 	{ -- gx
 		"chrishrb/gx.nvim",
-		event = "Bufread",
 		keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
 		cmd = { "Browse" },
 		dependencies = { "nvim-lua/plenary.nvim" },
