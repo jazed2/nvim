@@ -1,7 +1,7 @@
 return {
 
 	-- Automatic tabstop and shift width
-	{ "tpope/vim-sleuth" },
+	{ "tpope/vim-sleuth", event = "BufReadPre" },
 
 	-- Undotree
 	{
@@ -13,7 +13,7 @@ return {
 	-- "gc" to comment visual regions/lines
 	{
 		"numToStr/Comment.nvim",
-		event = "VimEnter",
+		event = "BufReadPre",
 		opts = {},
 	},
 
@@ -66,6 +66,7 @@ return {
 
 		{ -- Auto tags for html
 			"windwp/nvim-ts-autotag",
+			event = "BufReadPre",
 			filetype = {
 				"html",
 				"js",
@@ -150,7 +151,7 @@ return {
 
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
+		event = "BufReadPre", -- Sets the loading event to 'VimEnter'
 		config = function() -- This is the function that runs, AFTER loading
 			require("which-key").setup()
 
@@ -168,7 +169,7 @@ return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		lazy = false,
-		event = "VimEnter",
+		event = "BufReadPre",
 		keys = {
 			{
 				"<leader>f",
@@ -214,7 +215,7 @@ return {
 
 	{ -- Persist sessions
 		"folke/persistence.nvim",
-		event = "BufReadPre",
+		lazy = false,
 
 		opts = {
 			dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved

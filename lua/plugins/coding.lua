@@ -3,7 +3,7 @@ return {
 	{ -- DAP and debugging utils
 		-- NOTE: Yes, you can install new plugins here!
 		"mfussenegger/nvim-dap",
-		event = "BufWinEnter",
+		event = "BufReadPre",
 		-- NOTE: And you can specify dependencies as well
 		dependencies = {
 			-- Creates a beautiful debugger UI
@@ -19,7 +19,6 @@ return {
 			-- Add your own debuggers here
 			"leoluz/nvim-dap-go",
 		},
-		event = "BufWinEnter",
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
@@ -145,7 +144,7 @@ return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		events = { "BufRead", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile" },
 		requires = { "tadmccorkle/markdown.nvim" },
 		opts = {
 			ensure_installed = {
