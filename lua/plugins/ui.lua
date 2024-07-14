@@ -10,8 +10,6 @@ return {
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		cmd = { "Loadview", "Mkview" },
-		event = "BufReadPre",
 
 		config = function()
 			local ufo = require("ufo")
@@ -278,7 +276,6 @@ return {
 
 	{ -- Statusline
 		"bluz71/nvim-linefly",
-		event = "BufReadPre",
 		config = function()
 			vim.g.linefly_options = { -- opts
 				separator_symbol = "⎪",
@@ -301,6 +298,14 @@ return {
 				with_spell_status = false,
 				with_indent_status = false,
 			}
+		end,
+	},
+
+	{ -- SMooth aF scroll
+		"karb94/neoscroll.nvim",
+		event = "BufReadPre",
+		config = function()
+			require("neoscroll").setup({})
 		end,
 	},
 }
