@@ -2,7 +2,6 @@ return {
 
 	{ -- Oil
 		"stevearc/oil.nvim",
-		cmd = "Oil",
 		opts = {
 			skip_confirm_for_simple_edits = true,
 			view_options = {

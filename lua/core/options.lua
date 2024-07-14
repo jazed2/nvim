@@ -101,9 +101,9 @@ opt.spelllang = "en_us"
 opt.swapfile = false
 
 -- Something related to search
-vim.opt.wildmenu = true
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildoptions = "pum"
+opt.wildmenu = true
+opt.wildmode = "longest:full,full"
+opt.wildoptions = "pum"
 
 -- Jumplist for superfast
-vim.opt.jumpoptions = "stack,view"
+opt.jumpoptions = "stack,view"

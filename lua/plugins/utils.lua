@@ -1,7 +1,7 @@
 return {
 
 	-- Automatic tabstop and shift width
-	{ "tpope/vim-sleuth", event = "BufReadPre" },
+	{ "tpope/vim-sleuth" },
 
 	-- Undotree
 	{
@@ -66,7 +66,7 @@ return {
 
 		{ -- Auto tags for html
 			"windwp/nvim-ts-autotag",
-			event = "BufReadPre",
+			event = "InsertEnter",
 			filetype = {
 				"html",
 				"js",
