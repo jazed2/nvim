@@ -2,7 +2,6 @@ return {
 
 	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
-		event = "BufRead",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = true },
 	},
@@ -85,7 +84,6 @@ return {
 
 	{ -- Show line indent
 		"lukas-reineke/indent-blankline.nvim",
-		event = "BufReadPre",
 		dependencies = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		main = "ibl",
 		opts = {},
@@ -298,14 +296,6 @@ return {
 				with_spell_status = false,
 				with_indent_status = false,
 			}
-		end,
-	},
-
-	{ -- SMooth aF scroll
-		"karb94/neoscroll.nvim",
-		event = "BufReadPre",
-		config = function()
-			require("neoscroll").setup({})
 		end,
 	},
 }
