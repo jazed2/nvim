@@ -12,7 +12,7 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
 -- Nice tab spacing
-opt.expandtab = true
+opt.expandtab = false
 opt.shiftwidth = 2
 opt.tabstop = 4
 
@@ -94,7 +94,7 @@ opt.conceallevel = 2
 opt.formatoptions:remove("o")
 
 -- Set spell checking
-opt.spell = false
+opt.spell = true
 opt.spelllang = "en_us"
 
 -- Disable swap file, allows file to edited by different windows
