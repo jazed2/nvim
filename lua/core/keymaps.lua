@@ -72,7 +72,7 @@ _G.toggle_tabline = function()
 	end
 end
 vim.cmd("command! ToggleTabline lua toggle_tabline()")
-keymap("", "<leader>bt", "<cmd>ToggleTabline<cr>", opts)
+keymap("", "<leader>tt", "<cmd>ToggleTabline<cr>", opts)
 
 -- Scroll keybinds
 keymap({ "n", "v" }, "<C-u>", "<C-u>zz", { desc = "Better half up scroll", remap = true })
