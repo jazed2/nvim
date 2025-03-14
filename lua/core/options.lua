@@ -4,7 +4,7 @@ local opt = vim.opt
 -- For more options, you can see `:help option-list`
 
 -- Highlight tabs for better visibility
-vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#808080", fg = "#FFFFFF" })
+vim.cmd([[highlight TabLineSel guifg=#000000 guibg=#e6e6e6]])
 
 -- Set <space> as the leader key
 vim.g.mapleader = " "
