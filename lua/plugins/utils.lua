@@ -3,15 +3,13 @@ return {
 	-- Automatic tabstop and shift width
 	{ "tpope/vim-sleuth" },
 
-	-- Undotree
-	{
+	{ -- Undotree
 		"mbbill/undotree",
 		event = "BufReadPre",
 		vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree Toggle" }),
 	},
 
-	-- "gc" to comment visual regions/lines
-	{
+	{ -- "gc" to comment visual regions/lines
 		"numToStr/Comment.nvim",
 		event = "BufReadPre",
 		opts = {},
