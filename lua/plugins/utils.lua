@@ -284,6 +284,18 @@ return {
 		event = "BufReadPre",
 	},
 
+	{ -- fzf-lua
+		"ibhagwan/fzf-lua",
+		event = "BufReadPre",
+		config = function()
+			require("fzf-lua").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
+
 	{ -- Local configs
 		"klen/nvim-config-local",
 		config = function()
