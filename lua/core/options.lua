@@ -26,7 +26,7 @@ opt.number = true
 opt.mouse = "a"
 
 -- Don't show the mode, since it's already in the status line
-opt.showmode = false
+opt.showmode = true
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -66,9 +66,6 @@ opt.inccommand = "split"
 -- Show which line your cursor is on
 opt.cursorline = true
 opt.cursorlineopt = "number"
-
--- Primagen style colorcolumn
-opt.colorcolumn = "120"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 10

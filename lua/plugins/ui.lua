@@ -274,6 +274,7 @@ return {
 
 	{ -- Statusline
 		"bluz71/nvim-linefly",
+		enabled = false,
 		config = function()
 			vim.g.linefly_options = { -- opts
 				separator_symbol = "⎪",
