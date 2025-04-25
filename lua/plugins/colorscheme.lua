@@ -1,12 +1,19 @@
 return {
-	{
-		"Mofiqul/adwaita.nvim",
+	{ -- alabaster
+		"p00f/alabaster.nvim",
 		lazy = false,
 		priority = 1000,
-		-- configure and set on startup
-		config = function()
-			vim.g.adwaita_darker = true -- for darker version
-			vim.g.adwaita_transparent = true -- makes the background transparent
-		end,
+	},
+
+	{ -- true-monochrome
+		"ryanpcmcquen/true-monochrome_vim",
+		lazy = false,
+		priority = 1000,
+	},
+
+	{ -- rasmus
+		"kvrohit/rasmus.nvim",
+		lazy = false,
+		priority = 1000,
 	},
 }
