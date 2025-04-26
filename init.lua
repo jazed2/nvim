@@ -2,6 +2,6 @@ require("core.options")
 require("core.keymaps")
 require("core.autocommands")
 require("core.lazy")
-require("core.statusline")
+require("modules.statusline")
 
-vim.cmd.colorscheme("lunaperche")
+vim.cmd.colorscheme("no-clown-fiesta")
