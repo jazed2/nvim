@@ -13,20 +13,19 @@ function _G._statusline_component(name)
 end
 
 function SlComponent.diagnosticStatus()
-	local diagnosis = " ✔ "
 	local diagnosticSeverity = vim.diagnostic.severity
 
 	local errors = #vim.diagnostic.get(0, { severity = diagnosticSeverity.ERROR })
 	if errors > 0 then
-		diagnosis = "%%#Error#%E:" .. errors .. "%* "
+		return hiPattern:format("@comment.error", " E:" .. errors .. " ")
 	end
 
 	local warnings = #vim.diagnostic.get(0, { severity = diagnosticSeverity.WARN })
 	if warnings > 0 then
-		diagnosis = " W:" .. warnings .. " "
+		return hiPattern:format("@comment.warning", " W:" .. warnings .. " ")
 	end
 
-	return hiPattern:format("Search", diagnosis)
+	return ""
 end
 
 function SlComponent.vcsInfo()
@@ -58,7 +57,7 @@ function SlComponent.vcsInfo()
 	end
 
 	return hiPattern:format(
-		"@markup",
+		"Search",
 		table.concat({
 			" ",
 			branch,
@@ -66,7 +65,6 @@ function SlComponent.vcsInfo()
 			added,
 			changed,
 			removed,
-			" ",
 		})
 	)
 end
@@ -98,10 +96,9 @@ function SlComponent.position()
 end
 
 local statusline = {
-	'%{%v:lua._statusline_component("diagnosticStatus")%}',
-	'%{%v:lua._statusline_component("vcsInfo")%}',
-	"%=",
+	'%{%v:lua._statusline_component("vcsInfo")%} ',
 	'%{%v:lua._statusline_component("fileName")%} ',
+	' %{%v:lua._statusline_component("diagnosticStatus")%} ',
 	"%=",
 	' %{%v:lua._statusline_component("lspNames")%}',
 	'%{%v:lua._statusline_component("position")%}',
