@@ -82,41 +82,6 @@ return {
 		end,
 	},
 
-	{ -- Show line indent
-		"lukas-reineke/indent-blankline.nvim",
-		dependencies = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		main = "ibl",
-		opts = {},
-		config = function()
-			local highlight = {
-				"RainbowRed",
-				"RainbowYellow",
-				"RainbowBlue",
-				"RainbowOrange",
-				"RainbowGreen",
-				"RainbowViolet",
-				"RainbowCyan",
-			}
-			local hooks = require("ibl.hooks")
-			-- create the highlight groups in the highlight setup hook, so they are reset
-			-- every time the colorscheme changes
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-			end)
-
-			vim.g.rainbow_delimiters = { highlight = highlight }
-			require("ibl").setup({ scope = { highlight = highlight } })
-
-			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-		end,
-	},
-
 	{ -- Btter nvim UI
 		"stevearc/dressing.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
@@ -269,34 +234,6 @@ return {
 				-- see :help dressing_get_config
 				get_config = nil,
 			})
-		end,
-	},
-
-	{ -- Statusline
-		"bluz71/nvim-linefly",
-		enabled = false,
-		config = function()
-			vim.g.linefly_options = { -- opts
-				separator_symbol = "⎪",
-				progress_symbol = "↓",
-				active_tab_symbol = "*",
-				git_branch_symbol = "",
-				error_symbol = "E",
-				warning_symbol = "W",
-				information_symbol = "I",
-				ellipsis_symbol = "…",
-				with_file_icon = true,
-				with_git_branch = true,
-				with_git_status = true,
-				with_diagnostic_status = true,
-				with_session_status = true,
-				with_attached_clients = true,
-				with_lsp_status = false,
-				with_macro_status = false,
-				with_search_count = false,
-				with_spell_status = false,
-				with_indent_status = false,
-			}
 		end,
 	},
 

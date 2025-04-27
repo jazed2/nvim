@@ -3,7 +3,6 @@ local M = {}
 local SlComponent = {} -- statusline components
 
 local hiPattern = "%%#%s#%s%%*" -- ergonomics
----@param hiPattern string
 -- hiPatterns usage:
 -- hiPattern:format("highlight-group", "text") or hiPattern.format(hiPattern,"highlight-group", "text")
 -- example: hiPattern:format("Search", "text")
@@ -73,32 +72,7 @@ function SlComponent.vcsInfo()
 end
 
 function SlComponent.fileName()
-	function splitAtDelim(filePath, delimiter) -- Make table out of every word separated by the Delimiter == /
-		local pattern = string.format("([^%s]+)", delimiter)
-		local pathComponenets = {}
-
-		for str in filePath:gmatch(pattern) do
-			table.insert(pathComponenets, str)
-		end
-
-		return pathComponenets
-	end
-
-	local filePath = vim.fn.expand("%F")
-
-	if filePath:sub(1, 2) == "~/" then
-		local pathParts = splitAtDelim(filePath:sub(3), "/")
-		if #pathParts >= 3 then
-			local a = pathParts[#pathParts - 2]
-			local b = pathParts[#pathParts - 1]
-			local c = pathParts[#pathParts]
-			return a .. "/" .. b .. "/" .. c
-		else
-			return hiPattern:format("@markup", filePath)
-		end
-	else
-		return hiPattern:format("@markup", filePath)
-	end
+	return hiPattern:format("@markup", "%f%m")
 end
 
 function SlComponent.lspNames()
@@ -125,8 +99,8 @@ end
 
 local statusline = {
 	'%{%v:lua._statusline_component("diagnosticStatus")%}',
-	'%{%v:lua._statusline_component("vcsInfo")%} ',
-	" %=",
+	'%{%v:lua._statusline_component("vcsInfo")%}',
+	"%=",
 	'%{%v:lua._statusline_component("fileName")%} ',
 	"%=",
 	' %{%v:lua._statusline_component("lspNames")%}',
