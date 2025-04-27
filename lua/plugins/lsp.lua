@@ -12,6 +12,7 @@ return {
 
 			{ "folke/neodev.nvim", opts = {} },
 		},
+
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -214,6 +215,7 @@ return {
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
 
+				window = { completion = cmp.config.window.bordered({ border = "rounded" }) },
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
 				--
