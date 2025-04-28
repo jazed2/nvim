@@ -92,7 +92,7 @@ function SlComponent.lspNames()
 end
 
 function SlComponent.position()
-	return hiPattern:format("Search", " %3l:%-2c [%2p%%] ")
+	return hiPattern:format("Search", " %3l:%-2c %L [%2p%%] ")
 end
 
 local statusline = {
