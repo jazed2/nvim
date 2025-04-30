@@ -10,9 +10,14 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Diagnostic keymaps
-keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-keymap("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+keymap("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to next [D]iagnostic message" })
+
+keymap("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next [D]iagnostic message" })
+
 keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -63,6 +68,7 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 
 -- Toggle tabline
 vim.opt.showtabline = 0
+vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#808080", fg = "#FFFFFF" }) -- highlight tabs for better visibility
 _G.toggle_tabline = function()
 	local showtabline = vim.api.nvim_get_option("showtabline")
 	if showtabline > 0 then
