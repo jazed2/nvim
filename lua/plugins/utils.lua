@@ -165,7 +165,6 @@ return {
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		event = "BufReadPre",
 		keys = {
 			{
 				"<leader>f",
@@ -211,6 +210,7 @@ return {
 
 	{ -- Persist sessions
 		"folke/persistence.nvim",
+		event = "BufReadPre",
 		cmd = "Lua require('persistence).load()",
 
 		opts = {
@@ -245,7 +245,7 @@ return {
 
 	{ -- Nvim markdown preview
 		"OXY2DEV/markview.nvim",
-		lazy = false,
+		ft = "markdown",
 
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",

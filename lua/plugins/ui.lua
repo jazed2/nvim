@@ -2,12 +2,14 @@ return {
 
 	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
+		events = { "BufReadPre", "BufAdd" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = true },
 	},
 
 	{ -- Nice folding
 		"kevinhwang91/nvim-ufo",
+		events = { "BufAdd" },
 		dependencies = "kevinhwang91/promise-async",
 
 		config = function()
@@ -62,7 +64,7 @@ return {
 				},
 
 				provider_selector = function(bufnr, filetype, buftype)
-					return { "treesitter", "indent" }
+					return { "lsp", "indent" }
 				end,
 
 				fold_virt_text_handler = handler,
@@ -239,6 +241,7 @@ return {
 
 	{ -- Show context of currently visible content
 		"nvim-treesitter/nvim-treesitter-context",
+		event = { "BufReadPre", "BufAdd" },
 		config = function()
 			require("treesitter-context").setup({
 				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

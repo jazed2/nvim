@@ -2,6 +2,7 @@ return {
 
 	{ -- Superfast AI autocomplete
 		"supermaven-inc/supermaven-nvim",
+		event = "InsertEnter",
 		enabled = true,
 		config = function()
 			require("supermaven-nvim").setup({
