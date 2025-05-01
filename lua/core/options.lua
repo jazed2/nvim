@@ -69,6 +69,7 @@ opt.cursorlineopt = "number"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 10
+opt.sidescrolloff = 8
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = true
@@ -106,3 +107,6 @@ opt.wildoptions = "pum"
 
 -- Jumplist for superfast
 opt.jumpoptions = "stack,view"
+
+-- Disable vi compatibility
+opt.compatible = false

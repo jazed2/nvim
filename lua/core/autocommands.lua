@@ -9,16 +9,16 @@ autocmd("TextYankPost", { -- Highlight when yanking (copying) text
 	end,
 })
 
-autocmd({ "BufWinLeave", "BufEnter" }, { -- Save folds
+autocmd({ "BufWinLeave" }, { -- Save folds
 	pattern = { "*.*" },
 	desc = "Save folds when exiting",
-	command = "mkview 1",
+	command = "mkview",
 })
 
-autocmd({ "BufWinEnter", "BufRead" }, { -- Reload folds
+autocmd({ "BufWinEnter" }, { -- Reload folds
 	pattern = { "*.*" },
 	desc = "Load folds when entering",
-	command = "silent! loadview 1",
+	command = "silent! loadview",
 })
 
 autocmd("BufWinEnter", { -- Open :h in vertical split on right

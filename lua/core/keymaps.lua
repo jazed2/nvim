@@ -67,7 +67,7 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 ]])
 
 -- Toggle tabline
-vim.opt.showtabline = 0
+vim.opt.showtabline = 1
 vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#808080", fg = "#FFFFFF" }) -- highlight tabs for better visibility
 _G.toggle_tabline = function()
 	local showtabline = vim.api.nvim_get_option("showtabline")
