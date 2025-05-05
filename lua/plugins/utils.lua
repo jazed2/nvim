@@ -9,12 +9,6 @@ return {
 		vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndotree Toggle" }),
 	},
 
-	{ -- "gc" to comment visual regions/lines
-		"numToStr/Comment.nvim",
-		event = "BufReadPre",
-		opts = {},
-	},
-
 	{ -- Automatic closing bracket and tags pairs based on rules
 
 		{ -- For auto brackets and quotes
