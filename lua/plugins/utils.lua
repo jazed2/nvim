@@ -274,8 +274,15 @@ return {
 	},
 
 	{ -- Macro repository to save macros
-		"chamindra/marvim",
-		event = "BufReadPre",
+		"kr40/nvim-macros",
+		cmd = { "MacroSave", "MacroYank", "MacroSelect", "MacroDelete" },
+		config = function()
+			require("macros").setup({
+				json_file_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/macros.json"),
+				default_macro_register = "q",
+				json_formatter = "jq",
+			})
+		end,
 	},
 
 	{ -- fzf-lua
