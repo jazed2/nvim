@@ -91,3 +91,6 @@ keymap("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 keymap("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 keymap("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 keymap("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+
+-- Reload config
+vim.cmd([[command ReloadConfig source ~/.config/nvim/init.lua]])
