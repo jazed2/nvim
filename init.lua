@@ -4,4 +4,4 @@ require("core.autocommands")
 require("core.lazy")
 require("modules.statusline")
 
-vim.cmd.colorscheme("no-clown-fiesta")
+vim.cmd.colorscheme("randomhue")
