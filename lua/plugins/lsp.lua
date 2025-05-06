@@ -1,4 +1,14 @@
 return {
+	{ -- LSP config for nvim plugin development
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 
 	{ -- LSP config
 		"neovim/nvim-lspconfig",
@@ -11,7 +21,6 @@ return {
 
 			{ "j-hui/fidget.nvim", opts = {} },
 
-			{ "folke/neodev.nvim", opts = {} },
 		},
 
 		config = function()
