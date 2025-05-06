@@ -237,42 +237,6 @@ return {
 		),
 	},
 
-	{ -- Nvim markdown preview
-		"OXY2DEV/markview.nvim",
-		ft = "markdown",
-
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-
-	{ -- Markdown previewing in browser
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = "markdown",
-
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-
-		config = function()
-			vim.cmd([[do FileType]])
-			vim.cmd([[
-			function OpenMarkdownPreview (url)
-			let cmd = "surf -bdfIK " . shellescape(a:url) . " &"
-			silent call system(cmd)
-			endfunction
-			]])
-			vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
-
-			vim.g.mkdp_open_ip = "127.0.0.1"
-			vim.g.mkdp_port = 6942
-		end,
-
-		vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { noremap = true, silent = true }),
-	},
-
 	{ -- Macro repository to save macros
 		"kr40/nvim-macros",
 		cmd = { "MacroSave", "MacroYank", "MacroSelect", "MacroDelete" },
