@@ -15,10 +15,6 @@ return {
 				noremap = true,
 			},
 		},
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
 	},
 
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
