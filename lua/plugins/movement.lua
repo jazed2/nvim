@@ -2,7 +2,7 @@ return {
 
 	{ -- Nvim Tmux navigation
 		"alexghergh/nvim-tmux-navigation",
-		event = BufReadPre,
+		event = "BufReadPre",
 		config = function()
 			local nvim_tmux_nav = require("nvim-tmux-navigation")
 
