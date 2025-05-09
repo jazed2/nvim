@@ -12,7 +12,6 @@ return {
 
 	{ -- LSP config
 		"neovim/nvim-lspconfig",
-		event = "BufAdd",
 		dependencies = {
 			{ "williamboman/mason.nvim", opts = {} },
 			"williamboman/mason-lspconfig.nvim",
@@ -192,8 +191,27 @@ return {
 						},
 					},
 				},
+
 				harper_ls = {
-					filetypes = { "markdown", "typst", "tex", "asciidoc", "text" },
+					filetypes = { "markdown", "typst", "txt" },
+					settings = {
+						["harper-ls"] = {
+							linters = {
+								SentenceCapitalization = false,
+								Spellcheck = false,
+							},
+						},
+					},
+				},
+
+				bashls = {
+					cmd = { "bash-language-server", "start" },
+					filetypes = { "sh", "zsh", "bash" },
+					settings = {
+						bashIde = {
+							globPattern = "*@(.sh|.inc|.bash|.command)",
+						},
+					},
 				},
 			}
 
