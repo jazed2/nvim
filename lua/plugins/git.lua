@@ -1,8 +1,5 @@
 return {
 
-	-- Git related plugins
-	"tpope/vim-fugitive",
-
 	{ -- LazyGit integration with Telescope
 		"kdheepak/lazygit.nvim",
 		event = "BufRead",

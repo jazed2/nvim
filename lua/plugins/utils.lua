@@ -1,7 +1,6 @@
 return {
 
-	-- Automatic tabstop and shift width
-	{ "tpope/vim-sleuth" },
+	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 
 	{ -- Undotree
 		"mbbill/undotree",
@@ -11,7 +10,6 @@ return {
 
 	{ -- Mini nvim collection
 		"echasnovski/mini.nvim",
-		event = "BufRead",
 		config = function()
 			-- Better Around/Inside textobjects
 			--
@@ -69,32 +67,84 @@ return {
 
 			-- Auto pairs
 			require("mini.pairs").setup()
+
+			-- -- Statusline
+			-- local statusline = require("mini.statusline")
+			-- -- set use_icons to true if you have a Nerd Font
+			-- statusline.setup({ use_icons = vim.g.have_nerd_font })
+			--
+			-- -- You can configure sections in the statusline by overriding their
+			-- -- default behavior. For example, here we set the section for
+			-- -- cursor location to LINE:COLUMN
+			-- ---@diagnostic disable-next-line: duplicate-set-field
+			-- statusline.section_location = function()
+			-- 	return "%2l:%-2v"
+			-- end
 		end,
 	},
 
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("which-key").setup()
+		event = "VimEnter", -- Sets the loading event to 'VimEnter'
+		opts = {
+			-- delay between pressing a key and opening which-key (milliseconds)
+			-- this setting is independent of vim.o.timeoutlen
+			delay = 0,
+			icons = {
+				-- set icon mappings to true if you have a Nerd Font
+				mappings = vim.g.have_nerd_font,
+				-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+				-- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+				keys = vim.g.have_nerd_font and {} or {
+					Up = "<Up> ",
+					Down = "<Down> ",
+					Left = "<Left> ",
+					Right = "<Right> ",
+					C = "<C-…> ",
+					M = "<M-…> ",
+					D = "<D-…> ",
+					S = "<S-…> ",
+					CR = "<CR> ",
+					Esc = "<Esc> ",
+					ScrollWheelDown = "<ScrollWheelDown> ",
+					ScrollWheelUp = "<ScrollWheelUp> ",
+					NL = "<NL> ",
+					BS = "<BS> ",
+					Space = "<Space> ",
+					Tab = "<Tab> ",
+					F1 = "<F1>",
+					F2 = "<F2>",
+					F3 = "<F3>",
+					F4 = "<F4>",
+					F5 = "<F5>",
+					F6 = "<F6>",
+					F7 = "<F7>",
+					F8 = "<F8>",
+					F9 = "<F9>",
+					F10 = "<F10>",
+					F11 = "<F11>",
+					F12 = "<F12>",
+				},
+			},
 
-			require("which-key").add({
-				{ "<leader>c", desc = "[C]ode" },
-				{ "<leader>d", desc = "[D]ocument" },
-				{ "<leader>r", desc = "[R]ename" },
-				{ "<leader>s", desc = "[S]earch" },
-				{ "<leader>w", desc = "[W]orkspace" },
-			})
-		end,
+			-- Document existing key chains
+			spec = {
+				{ "<leader>s", group = "[S]earch" },
+				{ "<leader>t", group = "[T]oggle" },
+				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+			},
+		},
 	},
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		keys = {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_fallback = true })
+					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
 				mode = "",
 				desc = "[F]ormat buffer",
@@ -107,32 +157,22 @@ return {
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
 				local disable_filetypes = { c = true, cpp = true }
-				return {
-					timeout_ms = 500,
-					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-				}
+				if disable_filetypes[vim.bo[bufnr].filetype] then
+					return nil
+				else
+					return {
+						timeout_ms = 500,
+						lsp_format = "fallback",
+					}
+				end
 			end,
 			formatters_by_ft = {
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				css = { "prettierd" },
-				html = { "prettierd" },
-				yaml = { "prettierd" },
-				json = { "jq" },
-				python = {"isort", "black"},
-				markdown = { "markdownlint" },
 				lua = { "stylua" },
-				bash = {"beautysh"},
-				zsh = {"beautysh"},
-				sh = {"beautysh"},
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
+				-- You can use 'stop_after_first' to run the first available formatter from the list
+				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},
 	},
@@ -192,26 +232,6 @@ return {
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
 				-- refer to the configuration section below
-			})
-		end,
-	},
-
-	{ -- Local configs
-		"klen/nvim-config-local",
-		config = function()
-			require("config-local").setup({
-				-- Default options (optional)
-
-				-- Config file patterns to load (lua supported)
-				config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
-
-				-- Where the plugin keeps files data
-				hashfile = vim.fn.stdpath("data") .. "/config-local",
-
-				autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-				commands_create = true, -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalDeny)
-				silent = false, -- Disable plugin messages (Config loaded/denied)
-				lookup_parents = false, -- Lookup config files in parent directories
 			})
 		end,
 	},
